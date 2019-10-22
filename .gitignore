@@ -1,6 +1,7 @@
 *.csv
 
 /labeled_data
+/predictions
 
 .idea/
 
