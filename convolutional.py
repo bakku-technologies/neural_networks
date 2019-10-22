@@ -69,8 +69,17 @@ model.fit(us_train, ang_train, validation_split=0.3, epochs=10, batch_size=8, ve
 
 print('predictions...')
 preds = model.predict(us_test)
+# preds = model.predict(us_train)
+
+# TODO: fix the last two data points from doing this
+for i in range(len(preds)):
+    if preds[i] < 0 or preds[i] > 2:
+        preds[i] = 0.25
 
 plt.plot(ang_test, 'b')
+# plt.plot(ang_train, 'b')
 plt.plot(preds, 'r')
-# plt.savefig('cnn_acc.png')
 plt.show()
+
+np.save('predictions/cnn_pred', preds)
+# np.save('predictions/cnn_train_pred', preds)
