@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Neural Networks</title>
+</head>
+
+<body>
+    <h1>
+        Neural Networks
+    </h1>
+
+    <form action="/testModel/" method="post">
+        <h3>Choose test network:</h3>
+        <input type="radio" name="nn_type" value="rnn">Recurrent NN
+        <input type="radio" name="nn_type" value="cnn">Convolutional NN
+
+        <br>
+        <br>
+
+        <h3>Choose test data:</h3>
+        <input type="radio" name="test_data" value="open_close_test">Open and Close Test Data
+        <input type="radio" name="test_data" value="open_close_train">Open and Close Train Data
+        <input type="radio" name="test_data" value="pinch_relax_test">Pinch and Relax Test Data
+        <input type="radio" name="test_data" value="pinch_relax_train">Pinch and Relax Train Data
+
+        <br>
+        <br>
+
+        <button name="testModel" type="submit" >Test</button>
+
+        <br>
+        <br>
+
+    </form>
+
+    <div id="results">
+        <h3>{{title}}</h3>
+        <img src="{{plot_src}}"> <br>
+        {{score}}
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    const testClick = (e) => {
+        console.log('clicked');
+
+
+        //return false;
+    }
+</script>
+
+</html>

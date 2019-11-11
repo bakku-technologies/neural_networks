@@ -1,8 +1,10 @@
 *.csv
+*.m
 
 /labeled_data
 /predictions
+/original_data
 
 .idea/
 
-.DS_Store
+.DS_Store/
