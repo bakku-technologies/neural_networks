@@ -1,8 +1,12 @@
 *.csv
+*.m
 
 /labeled_data
 /predictions
+/original_data
 
 .idea/
 
-.DS_Store
+.DS_Store/
+
+models/four_fingers/fist_relax_convolutional.h5

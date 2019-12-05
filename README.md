@@ -7,3 +7,7 @@ First, run store_data.py to save processed training and testing data as npy file
 - convolutional.py: convolutional neural network (functional)
 - svm_regression.py: support vector machine (functional)
 - recurrent_nn.py: recurrent neural network (NOT functional)
+
+To Use WebApp
+- cd web_app
+- python app.py

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Neural Networks</title>
+</head>
+
+<body>
+    <h1>
+        Neural Networks: Four Finger
+    </h1>
+
+    <form action="/testFourFinger/" method="post">
+        <h3>Choose trained model:</h3>
+        <input type="radio" name="model" value="fr">Fist and Relax Data
+        <input type="radio" name="model" value="pr">Pinch and Relax Data
+        <input type="radio" name="model" value="both">Both Data Sets
+
+        <br>
+        <br>
+
+        <h3>Choose test data:</h3>
+        <input type="radio" name="test_data" value="open_close_test">Fist and Relax Test Data
+        <input type="radio" name="test_data" value="open_close_train">Fist and Relax Train Data
+        <input type="radio" name="test_data" value="pinch_relax_test">Pinch and Relax Test Data
+        <input type="radio" name="test_data" value="pinch_relax_train">Pinch and Relax Train Data
+
+        <br>
+        <br>
+
+        <button name="testModel" type="submit" >Test</button>
+
+        <br>
+        <br>
+
+    </form>
+
+    <div id="results">
+        <h3>{{title}}</h3>
+        <img src="{{plot_src_index}}"> <br>
+        {{error_index}} <br>
+        <img src="{{plot_src_middle}}"> <br>
+        {{error_middle}} <br>
+        <img src="{{plot_src_ring}}"> <br>
+        {{error_ring}} <br>
+        <img src="{{plot_src_pinky}}"> <br>
+        {{error_pinky}} <br>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    const testClick = (e) => {
+        console.log('clicked');
+
+
+        //return false;
+    }
+</script>
+
+</html>

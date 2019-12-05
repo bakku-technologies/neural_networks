@@ -2,7 +2,7 @@ import numpy as np
 import sys
 import os
 
-from tensorflow.keras.models import Model
+from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Input, Activation, BatchNormalization, Dropout
 import matplotlib.pyplot as plt
 from tensorflow.keras.losses import categorical_crossentropy
@@ -43,7 +43,7 @@ def create_cnn(width, height, depth, filters=(16, 21, 64), regress=False):
 
     # check to see if the regression node should be added
     if regress:
-        x = Dense(1, activation="linear")(x)
+        x = Dense(4, activation="linear")(x)
 
     # construct the CNN
     model = Model(inputs, x)
@@ -52,34 +52,32 @@ def create_cnn(width, height, depth, filters=(16, 21, 64), regress=False):
     return model
 
 
-ang_train = np.load('labeled_data/ang_train.npy')
-us_train = np.load('labeled_data/us_train.npy').flatten()  # .8 gigabyte
-us_test = np.load('labeled_data/us_test.npy').flatten()
-ang_test = np.load('labeled_data/ang_test.npy')
+print('loading data...')
 
+ang_train = np.load('labeled_data/fist_and_relax/four_fingers/ang_train.npy')
+us_train = np.load('labeled_data/fist_and_relax/four_fingers/us_train.npy').flatten()  # .8 gigabyte
 us_train = np.reshape(us_train, [-1, 310, 128, 1])
-us_test = np.reshape(us_test, [-1, 310, 128, 1])
 
+pinch_ang = np.load('labeled_data/pinch_relax/four_fingers/ang_train.npy')
+pinch_us = np.load('labeled_data/pinch_relax/four_fingers/us_train.npy').flatten()  # .8 gigabyte
+pinch_us = np.reshape(pinch_us, [-1, 310, 128, 1])
+
+ang_train = np.append(ang_train, pinch_ang)
+us_train = np.append(us_train, pinch_us)
+
+ang_train = np.reshape(ang_train, [-1, 4])
+us_train = np.reshape(us_train, [-1, 310, 128, 1])
+
+print(ang_train.shape)
+print(us_train.shape)
+
+print('creating model...')
 model = create_cnn(128, 310, 1, regress=True)
-opt = Adam(lr=1e-3, decay=1e-3/200)
+
+opt = Adam(lr=1e-2, decay=1e-3/200)  # base decay rate is 1e-3
 model.compile(loss="mean_absolute_percentage_error", optimizer=opt)
 
 print('training model...')
-model.fit(us_train, ang_train, validation_split=0.3, epochs=10, batch_size=8, verbose=2)
+model.fit(us_train, ang_train, validation_split=0.3, epochs=20, batch_size=32, verbose=2)  # base epochs=10, batch_size=8 (best: epochs=20, batch_size=20)
 
-print('predictions...')
-preds = model.predict(us_test)
-# preds = model.predict(us_train)
-
-# TODO: fix the last two data points from doing this
-for i in range(len(preds)):
-    if preds[i] < 0 or preds[i] > 2:
-        preds[i] = 0.25
-
-plt.plot(ang_test, 'b')
-# plt.plot(ang_train, 'b')
-plt.plot(preds, 'r')
-plt.show()
-
-np.save('predictions/cnn_pred', preds)
-# np.save('predictions/cnn_train_pred', preds)
+model.save('models/four_fingers/both_datasets_convolutional.h5')
