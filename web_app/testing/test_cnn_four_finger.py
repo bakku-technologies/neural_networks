@@ -49,20 +49,20 @@ def test_cnn_four_finger(data_type, model_type):
     test_y = []
     title = ""
     if data_type == 'open_close_test':
-        test_x = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/fist_and_relax/four_fingers/us_test.npy').flatten()
-        test_y = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/fist_and_relax/four_fingers/ang_test.npy')
+        test_x = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/fist_relax/four_fingers/us_test.npy').flatten()
+        test_y = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/fist_relax/four_fingers/ang_test.npy')
         title = 'CNN: Open and Close Test Data:'
     elif data_type == 'open_close_train':
-        test_x = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/fist_and_relax/four_fingers/us_train.npy').flatten()
-        test_y = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/fist_and_relax/four_finger/ang_train.npy')
+        test_x = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/fist_relax/four_fingers/us_train.npy').flatten()
+        test_y = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/fist_relax/four_fingers/ang_train.npy')
         title = 'CNN: Open and Close Train Data:'
     elif data_type == 'pinch_relax_test':
-        test_x = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/pinch_relax/four_fingers/us_test.npy').flatten()
-        test_y = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/pinch_relax/four_fingers/ang_test.npy')
+        test_x = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/pinch_relax/four_fingers/us_test.npy').flatten()
+        test_y = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/pinch_relax/four_fingers/ang_test.npy')
         title = 'CNN: Pinch and Relax Test Data:'
     elif data_type == 'pinch_relax_train':
-        test_x = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/pinch_relax/four_fingers/us_train.npy').flatten()
-        test_y = np.load('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/labeled_data/pinch_relax/four_fingers/ang_train.npy')
+        test_x = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/pinch_relax/four_fingers/us_train.npy').flatten()
+        test_y = np.load('/home/mitch/Documents/ultrasound_neural_networks/labeled_data/pinch_relax/four_fingers/ang_train.npy')
         title = 'CNN: Pinch and Relax Train Data:'
 
     test_x = np.reshape(test_x, [-1, 310, 128, 1])
@@ -71,14 +71,14 @@ def test_cnn_four_finger(data_type, model_type):
     if model_type == 'fr':
         model = tf.keras.models.load_model('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/web_app/testing/models/four_finger/fist_relax_convolutional.h5')
     elif model_type == 'pr':
-        model = tf.keras.models.load_model('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/web_app/testing/models/four_finger/pinch_relax_convolutional.h5')
+        model = tf.keras.models.load_model('/home/mitch/Documents/ultrasound_neural_networks/web_app/testing/models/four_finger/pinch_relax_convolutional.h5')
     elif model_type == 'both':
-        model = tf.keras.models.load_model('/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/web_app/testing/models/four_finger/both_datasets_convolutional.h5')
+        model = tf.keras.models.load_model('/home/mitch/Documents/ultrasound_neural_networks/web_app/testing/models/four_finger/both_datasets_convolutional.h5')
 
     print('predictions...')
     preds = model.predict(test_x)
 
-    errors = predict(preds, test_y, '/Users/cormac/Documents/WPIStuff/MQP/nn_old_data/web_app/static/four_finger')
+    errors = predict(preds, test_y, '/home/mitch/Documents/ultrasound_neural_networks/web_app/static/four_finger')
 
     return errors, title
 

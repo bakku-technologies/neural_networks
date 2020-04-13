@@ -20,7 +20,7 @@ def predict(index, images):
 
 
 def main():
-    images = np.load('../labeled_data/fist_and_relax/four_fingers/us_test.npy')
+    images = np.load('../labeled_data/fist_relax/four_fingers/us_test.npy')
 
     predict(500, images)
     predict(501, images)

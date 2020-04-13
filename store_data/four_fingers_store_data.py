@@ -29,7 +29,7 @@ pinky_data_3 = np.ones((0,3))
 pinky_data_4 = np.ones((0,3))
 
 print("getting mocap")
-with open("../original_data/Pinch_and_Relax01_Mocap.csv", "r") as f:
+with open("../original_data/Fist_and_Relax01_Mocap.csv", "r") as f:
     r = csv.reader(f)
     for i in range(5):
         next(r)
@@ -64,7 +64,7 @@ with open("../original_data/Pinch_and_Relax01_Mocap.csv", "r") as f:
 # numpy reallocating the array every time
 lines = np.ones((2000, 39680))
 print("getting ultrasound")
-with open("../original_data/pinch_relax_thevalues.csv", "r") as f:
+with open("../original_data/fist_relax_thevalues.csv", "r") as f:
     r = csv.reader(f)
     i = 0
     for line in r:
@@ -151,8 +151,8 @@ us_test = clipped_lines[split:,:]
 plt.plot(new_ang[:, 0], 'b')
 plt.savefig('pinch_relax_mocap')
 
-# np.save('../labeled_data/pinch_relax/four_fingers/ang_train.npy', ang_train)
-# np.save('../labeled_data/pinch_relax/four_fingers/ang_test.npy', ang_test)
-# np.save('../labeled_data/pinch_relax/four_fingers/us_train.npy', us_train)
-# np.save('../labeled_data/pinch_relax/four_fingers/us_test.npy', us_test)
-# print('Data saved')
+np.save('../labeled_data/fist_relax/four_fingers/ang_train.npy', ang_train)
+np.save('../labeled_data/fist_relax/four_fingers/ang_test.npy', ang_test)
+np.save('../labeled_data/fist_relax/four_fingers/us_train.npy', us_train)
+np.save('../labeled_data/fist_relax/four_fingers/us_test.npy', us_test)
+print('Data saved')

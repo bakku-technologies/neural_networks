@@ -4,9 +4,11 @@
 /labeled_data
 /predictions
 /original_data
-
+/data_2_5_2020
+/plots
+/models/*.h5
 .idea/
-
+/web_app/venv
 .DS_Store/
 
 models/four_fingers/fist_relax_convolutional.h5

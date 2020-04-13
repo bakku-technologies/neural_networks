@@ -37,6 +37,9 @@ def test_model():
 
     return render_template('index.html', score=score, plot_src=plot_src, title=title)
 
+@app.route("/getAngles/", methods=['POST'])
+def run_model():
+    return render_template('index.html')
 
 @app.route("/testFourFinger/", methods=['POST'])
 def test_four_finger_model():
